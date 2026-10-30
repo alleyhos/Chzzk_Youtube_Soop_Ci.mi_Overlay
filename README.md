@@ -24,7 +24,7 @@
 
 ## ⬇️ 다운로드 및 실행
 
-1. [Releases 페이지](https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases)에서 최신 Windows 실행 파일을 받습니다.
+1. [Releases 페이지](https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases)에서 최신 Windows 파일을 받습니다.
 2. 다운로드한 `Chzzk_Youtube_Overlay.exe`를 실행합니다.
 3. 설정 창에서 연결할 플랫폼의 주소를 입력하고 연결 버튼을 누릅니다.
 
