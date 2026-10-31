@@ -1,4 +1,4 @@
-# CHZZK + YouTube + SOOP Chat Overlay
+# CHZZK + YOUTUBE + SOOP Chat Overlay
 
 <p align="center">
   <strong>치지직 · YouTube · SOOP 채팅을 하나의 투명 오버레이로.</strong><br />
