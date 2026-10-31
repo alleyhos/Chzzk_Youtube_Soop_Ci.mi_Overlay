@@ -96,3 +96,4 @@
 <p align="center">
   Made by <strong>alleyhos2_17607 (소방호스)</strong>
 </p>
+<img width="632" height="353" alt="image" src="https://github.com/user-attachments/assets/31bf20a5-55da-4867-8114-953da200270d" />
