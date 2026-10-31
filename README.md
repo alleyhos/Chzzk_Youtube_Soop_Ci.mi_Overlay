@@ -91,9 +91,12 @@
 
 포함된 Agash-YTLiveChat 관련 라이선스 고지는 [LICENSES/Agash-YTLiveChat-MIT.txt](LICENSES/Agash-YTLiveChat-MIT.txt)를 확인해 주세요. 원문 저작권 및 MIT 라이선스 문구를 변경하지 않고 함께 제공합니다.
 
+<img width="632" height="353" alt="image" src="https://github.com/user-attachments/assets/7b6412f5-6147-46d9-b0cb-a6b051613179" />
+
+
 ---
 
 <p align="center">
   Made by <strong>alleyhos2_17607 (소방호스)</strong>
 </p>
-<img width="632" height="353" alt="image" src="https://github.com/user-attachments/assets/31bf20a5-55da-4867-8114-953da200270d" />
+
