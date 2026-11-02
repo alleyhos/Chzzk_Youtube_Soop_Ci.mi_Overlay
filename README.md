@@ -6,9 +6,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases">다운로드</a>
+  <a href="https://alleyhos.github.io/Chzzk_Youtube_Overlay/">치유숲 사이트</a>
   ·
-  <a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/issues">오류 제보</a>
+  <a href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases">다운로드</a>
+  ·
+  <a href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/issues">오류 제보</a>
 </p>
 
 ---

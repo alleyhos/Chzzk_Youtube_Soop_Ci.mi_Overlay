@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1015">
+  <meta name="description" content="치유숲 — 치지직, YouTube, SOOP 채팅을 한 화면에 모으는 Windows 방송용 오버레이">
+  <title>치유숲 — 하나의 오버레이, 세 개의 채팅</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23172229'/%3E%3Cpath d='M15 18h34v24H33L21 52v-10h-6z' fill='none' stroke='%2376dec8' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='m21 31 7-1 4-7 5 13 4-6h5' fill='none' stroke='%23f0c77d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="치유숲 홈">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 11h30v22H25L15 41v-8H9z"/><path class="pulse" d="m14 23 6-1 4-7 5 15 4-7h5"/></svg></span>
+      <span class="brand-copy"><strong>치유숲</strong><small>LIVE CHAT OVERLAY</small></span>
+    </a>
+    <nav aria-label="주 메뉴">
+      <a href="#features">기능</a>
+      <a href="#guide">사용 방법</a>
+      <a href="#notice">안내</a>
+    </nav>
+    <a class="top-download" href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases/latest">최신 버전 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> WINDOWS 10 / 11 · 원컴 방송용</div>
+        <h1>세 플랫폼 채팅을<br><em>하나의 화면</em>에.</h1>
+        <p class="hero-lede">치지직, YouTube, SOOP의 공개 채팅을 한 곳에 모아<br class="desktop-only"> 방송 중에도 편하게 확인하는 투명 오버레이.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases/latest">최신 버전 다운로드 <span aria-hidden="true">↗</span></a>
+          <a class="button button-quiet" href="#guide">빠른 시작 <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-note"><span class="check">✓</span> 채팅은 각 플랫폼에 직접 연결 · 별도 중계 서버 없음</div>
+      </div>
+      <div class="visual" aria-label="세 플랫폼 채팅을 한 오버레이에 표시하는 예시">
+        <div class="visual-glow"></div>
+        <div class="visual-window">
+          <div class="visual-title"><span class="window-icon">⌁</span><strong>LIVE CHAT</strong><span class="live-status"><i></i> 연결 대기</span><span class="dots">•••</span></div>
+          <div class="visual-platforms"><span class="platform ch">CH <b>치지직</b></span><span class="platform yt">YT <b>YouTube</b></span><span class="platform sp">SP <b>SOOP</b></span></div>
+          <div class="message"><span class="avatar mint">다</span><div><b class="name mint-text">달빛산책</b><p>오늘도 방송 잘 보고 있어요!</p></div><time>22:08</time></div>
+          <div class="message"><span class="avatar coral">수</span><div><b class="name coral-text">수요일의게임</b><p>세 채팅이 한 화면에 모이니까 편하네요</p></div><time>22:08</time></div>
+          <div class="message"><span class="avatar blue">하</span><div><b class="name blue-text">하늘보기</b><p>오버레이 위치도 자유롭게 조정 가능 ✨</p></div><time>22:09</time></div>
+          <div class="visual-foot"><span>치지직 · YouTube · SOOP</span><span>투명 오버레이</span></div>
+        </div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <span class="spark spark-one">✳</span><span class="spark spark-two">✦</span>
+      </div>
+      <div class="hero-bottom"><span>한 창에서 보는 라이브 채팅</span><span class="line"></span><span>필요한 플랫폼만 연결</span><span class="line"></span><span>방송 환경에 맞게 배치</span></div>
+    </section>
+
+    <section class="platform-strip shell" aria-label="지원 플랫폼">
+      <div class="strip-label">ONE OVERLAY<br><span>THREE PLATFORMS</span></div>
+      <div class="platform-name"><span class="logo-chip ch">CH</span><span>치지직<small>CHZZK</small></span></div>
+      <div class="platform-name"><span class="logo-chip yt">YT</span><span>YouTube<small>LIVE CHAT</small></span></div>
+      <div class="platform-name"><span class="logo-chip sp">SP</span><span>SOOP<small>LIVE CHAT</small></span></div>
+      <div class="strip-caption">원하는 채팅만 골라 연결하세요.</div>
+    </section>
+
+    <section class="section shell" id="features">
+      <div class="section-heading"><div><div class="eyebrow">MADE FOR YOUR STREAM</div><h2>방송 흐름에 맞춰<br>가볍게 조정하세요.</h2></div><p>게임 화면을 가리지 않도록 위치와 모양을 조절하고,<br>필요한 기능은 단축키로 빠르게 전환합니다.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card feature-wide">
+          <div class="feature-icon icon-mint">↗</div><span class="card-index">01 / OVERLAY</span><h3>원하는 곳에 두는 채팅창</h3><p>오버레이를 드래그해 방송 화면에 맞게 배치하고, 배경 투명도와 채팅 표시를 조정하세요.</p>
+          <div class="mini-layout"><div class="mini-screen"><span class="mini-game">GAME</span><div class="mini-chat"><b>LIVE CHAT</b><i></i><i></i><i></i></div><span class="corner tl"></span><span class="corner br"></span></div><span class="mini-label">배치 예시</span></div>
+        </article>
+        <article class="feature-card"><div class="feature-icon icon-gold">⌘</div><span class="card-index">02 / SHORTCUTS</span><h3>손을 떼지 않고 전환</h3><p><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>O</kbd> 표시 전환<br><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> 클릭 통과</p><div class="shortcut-orbit"><span>CTRL</span><b>+</b><span>ALT</span><b>+</b><strong>O</strong></div></article>
+        <article class="feature-card"><div class="feature-icon icon-blue">⟳</div><span class="card-index">03 / RECONNECT</span><h3>방송을 기다리고 다시 연결</h3><p>연결이 일시적으로 끊기면 자동 재연결을 시도합니다. 방송 시작 전에도 채널 상태를 확인합니다.</p><div class="reconnect-line"><i></i><span></span><i></i><span></span><i></i></div></article>
+        <article class="feature-card feature-wide feature-data"><div class="feature-icon icon-lilac">◎</div><span class="card-index">04 / LOCAL FIRST</span><h3>설정은 내 PC에 저장</h3><p>입력한 주소와 화면 설정은 로컬에 저장됩니다.<br>로그인 토큰이나 앱 Secret을 요청하지 않습니다.</p><div class="data-path"><span>이 PC</span><span class="data-arrow">⟶</span><code>%LOCALAPPDATA%\ChzzkOverlay\settings.json</code></div></article>
+      </div>
+    </section>
+
+    <section class="guide-section" id="guide">
+      <div class="shell guide-inner">
+        <div class="guide-intro"><div class="eyebrow">GET STARTED</div><h2>처음 연결도<br>간단하게.</h2><p>설치 후 방송 주소를 넣고 연결 버튼을 누르세요. 각 플랫폼은 필요한 것만 선택할 수 있습니다.</p><a class="text-link" href="README-KO.txt">전체 사용 설명서 보기 <span>↗</span></a></div>
+        <div class="steps">
+          <article class="step"><span class="step-number">01</span><div><h3>최신 버전 받기</h3><p>GitHub Releases에서 ZIP을 내려받아 압축을 풉니다.</p><a href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases/latest">Releases 열기 ↗</a></div></article>
+          <article class="step"><span class="step-number">02</span><div><h3>방송 주소 입력</h3><p>플랫폼 연결 화면에서 채널 또는 라이브 주소를 입력합니다.</p><span class="step-tags"><i>치지직</i><i>YouTube</i><i>SOOP</i></span></div></article>
+          <article class="step"><span class="step-number">03</span><div><h3>오버레이 배치</h3><p>위치를 옮기고 투명도와 채팅 표시를 방송 환경에 맞게 조절합니다.</p><span class="step-tags"><i>Ctrl + Alt + O</i><i>Ctrl + Alt + P</i></span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="notice-section shell" id="notice">
+      <div class="notice-mark">i</div><div><div class="eyebrow">SERVICE NOTE</div><h2>플랫폼 연결에 관한 안내</h2><p>치지직, YouTube, SOOP의 공개 웹 채팅 인터페이스를 사용합니다. 공식 외부 API가 아닌 연결 방식은 각 서비스의 변경이나 접속 제한에 영향을 받을 수 있으며, YouTube는 플랫폼 처리 시간과 네트워크 상황에 따라 표시가 늦어질 수 있습니다. 채팅은 이 PC에서 각 플랫폼에 직접 연결하며 별도 중계 서버를 사용하지 않습니다.</p></div>
+      <a class="notice-readme" href="README-KO.txt">README-KO 보기 ↗</a>
+    </section>
+  </main>
+
+  <footer class="footer shell"><a class="footer-brand" href="#top"><span class="footer-mark">✳</span> 치유숲</a><span>Windows 10 / 11 · 방송용 라이브 채팅 오버레이</span><div><a href="https://github.com/alleyhos/Chzzk_Youtube_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Overlay/releases/latest">다운로드</a></div></footer>
+</body>
+</html>
