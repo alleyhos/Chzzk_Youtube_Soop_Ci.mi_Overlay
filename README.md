@@ -25,8 +25,6 @@ Windows 10 / 11 원컴 방송 환경을 위한 통합 오버레이 프로그램�
 4. 사용할 플랫폼의 방송 주소를 입력합니다.
 5. 해당 플랫폼의 연결 버튼을 누르면 됩니다.
 
-별도의 앱 등록, OAuth 로그인, Google Cloud 프로젝트 또는 결제 카드가 필요하지 않습니다.
-
 ## 플랫폼 연결 방법
 
 ### 치지직 (CHZZK)
@@ -51,8 +49,6 @@ Windows 10 / 11 원컴 방송 환경을 위한 통합 오버레이 프로그램�
 - `https://www.youtube.com/live/동영상ID`
 - `https://www.youtube.com/live_chat?v=동영상ID&is_popout=1`
 - 11자리 동영상 ID
-
-Google Cloud API 키 없이 공개 웹 채팅 인터페이스를 이용합니다.
 
 ### SOOP
 
