@@ -4,25 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1114">
-  <meta name="description" content="치유숲은 치지직, YouTube, SOOP 채팅과 플랫폼별 시청자 수를 한 화면에서 보여주는 방송용 오버레이입니다.">
-  <meta property="og:title" content="치유숲 | 통합 라이브 채팅 오버레이">
-  <meta property="og:description" content="세 플랫폼 채팅과 시청자 수를 한 화면에서 확인하세요.">
+  <meta name="description" content="치유숲씨는 치지직, YouTube, SOOP, 씨미 채팅을 하나의 방송용 오버레이로 모아 보여줍니다.">
+  <meta property="og:title" content="치유숲씨 | 통합 라이브 채팅 오버레이">
+  <meta property="og:description" content="네 플랫폼 채팅과 시청자 수를 한 화면에서 확인하세요.">
   <meta property="og:type" content="website">
-  <title>치유숲 | 통합 라이브 채팅 오버레이</title>
+  <title>치유숲씨 | 통합 라이브 채팅 오버레이</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23172225'/%3E%3Cpath d='M17 17h30v24H32L21 49v-8h-4z' fill='none' stroke='%2379d8c3' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='m22 30 6-1 4-7 5 13 4-6h3' fill='none' stroke='%23d8bd83' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="치유숲 홈">
+      <a class="brand" href="#home" aria-label="치유숲씨 홈">
         <span class="brand-symbol" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none"><path d="M9 10.5h30v22H25l-10 7.5v-7.5H9z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="m14 22.5 6-.8 4-6.5 5 14 4-6h5" stroke="#d8bd83" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <span class="brand-label"><strong>치유숲</strong><small>LIVE CHAT OVERLAY</small></span>
+        <span class="brand-label"><strong>치유숲씨</strong><small>LIVE CHAT OVERLAY</small></span>
       </a>
       <nav class="main-nav" aria-label="주 메뉴">
         <a href="#features">주요 기능</a>
+        <a href="#updates">업데이트</a>
         <a href="#guide">사용 방법</a>
         <a href="#support">지원 안내</a>
       </nav>
@@ -34,8 +35,8 @@
     <section class="hero container">
       <div class="hero-copy">
         <p class="eyebrow"><span class="status-dot"></span> WINDOWS 10 / 11 · 방송용 데스크톱 앱</p>
-        <h1>세 플랫폼의 채팅,<br><span>한 화면에서.</span></h1>
-        <p class="hero-description">치지직, YouTube, SOOP 채팅을 하나의 오버레이로 확인하세요. 시청자 수와 화면 배치도 방송 환경에 맞게 조절할 수 있습니다.</p>
+        <h1>네 플랫폼의 채팅,<br><span>한 화면에서.</span></h1>
+        <p class="hero-description">치지직, YouTube, SOOP, 씨미 채팅을 하나의 오버레이로 확인하세요. 시청자 수와 화면 배치도 방송 환경에 맞게 조절할 수 있습니다.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">최신 버전 다운로드 <span aria-hidden="true">↗</span></a>
           <a class="button button-secondary" href="#guide">처음 사용하기</a>
@@ -43,26 +44,29 @@
         <div class="hero-trust"><span aria-hidden="true">✓</span> 별도 중계 서버 없이 각 플랫폼에 직접 연결</div>
       </div>
 
-      <div class="product-preview" aria-label="치유숲 오버레이 예시 화면">
+      <div class="product-preview" aria-label="치유숲씨 오버레이 예시 화면">
         <div class="preview-heading">
           <div class="preview-app-icon" aria-hidden="true">✳</div>
-          <div class="preview-heading-text"><strong>치유숲 오버레이</strong><span>통합 채팅 미리보기</span></div>
+          <div class="preview-heading-text"><strong>치유숲씨 오버레이</strong><span>네 플랫폼 통합 채팅</span></div>
           <span class="preview-live"><i></i> 미리보기</span>
         </div>
         <div class="preview-platforms" aria-label="지원 플랫폼">
           <span class="platform-chip chzzk"><b>CH</b> 치지직</span>
           <span class="platform-chip youtube"><b>YT</b> YouTube</span>
           <span class="platform-chip soop"><b>SP</b> SOOP</span>
+          <span class="platform-chip cime"><b>CM</b> 씨미</span>
         </div>
         <div class="preview-metrics">
-          <div><span>치지직 시청자</span><strong>표시 설정</strong></div>
-          <div><span>YouTube 시청자</span><strong>표시 설정</strong></div>
-          <div><span>SOOP 시청자</span><strong>표시 설정</strong></div>
+          <div><span>치지직</span><strong>시청자 수</strong></div>
+          <div><span>YouTube</span><strong>시청자 수</strong></div>
+          <div><span>SOOP</span><strong>시청자 수</strong></div>
+          <div><span>씨미</span><strong>시청자 수</strong></div>
         </div>
         <div class="preview-messages">
           <article class="preview-message"><span class="message-platform chzzk">CH</span><p><b>달빛산책</b><span>오늘 방송도 잘 보고 있어요!</span></p><time>22:08</time></article>
           <article class="preview-message"><span class="message-platform youtube">YT</span><p><b>하늘보기</b><span>채팅이 한곳에 모여서 편하네요.</span></p><time>22:09</time></article>
           <article class="preview-message"><span class="message-platform soop">SP</span><p><b>수요일의게임</b><span>오늘도 화이팅입니다!</span></p><time>22:09</time></article>
+          <article class="preview-message"><span class="message-platform cime">CM</span><p><b>햇살가득</b><span>네 플랫폼 채팅을 한곳에서 봐요.</span></p><time>22:10</time></article>
         </div>
         <div class="preview-footer"><span><i></i> 연결할 플랫폼을 선택하세요</span><span>투명 오버레이</span></div>
       </div>
@@ -70,10 +74,11 @@
 
     <section class="platform-band" aria-label="지원 플랫폼">
       <div class="container platform-band-inner">
-        <p class="platform-band-title">하나의 오버레이<br><span>세 가지 라이브 채팅</span></p>
+        <p class="platform-band-title">하나의 오버레이<br><span>네 가지 라이브 채팅</span></p>
         <div class="platform-name"><span class="platform-logo chzzk">CH</span><span>치지직<small>CHZZK</small></span></div>
         <div class="platform-name"><span class="platform-logo youtube">YT</span><span>YouTube<small>LIVE CHAT</small></span></div>
         <div class="platform-name"><span class="platform-logo soop">SP</span><span>SOOP<small>LIVE CHAT</small></span></div>
+        <div class="platform-name"><span class="platform-logo cime">CM</span><span>씨미<small>LIVE CHAT</small></span></div>
         <p class="platform-band-note">필요한 플랫폼만 골라 연결</p>
       </div>
     </section>
@@ -86,12 +91,12 @@
       <div class="feature-grid">
         <article class="feature-card">
           <span class="feature-number">01</span><span class="feature-icon icon-mint" aria-hidden="true">⌁</span>
-          <h3>세 플랫폼 통합 채팅</h3><p>치지직, YouTube, SOOP에서 필요한 채팅만 연결해 오버레이 한 곳에서 확인합니다.</p>
-          <div class="feature-tags"><span>치지직</span><span>YouTube</span><span>SOOP</span></div>
+          <h3>네 플랫폼 통합 채팅</h3><p>치지직, YouTube, SOOP, 씨미에서 필요한 채팅을 연결해 오버레이 한 곳에서 확인합니다.</p>
+          <div class="feature-tags"><span>치지직</span><span>YouTube</span><span>SOOP</span><span>씨미</span></div>
         </article>
         <article class="feature-card">
           <span class="feature-number">02</span><span class="feature-icon icon-gold" aria-hidden="true">◉</span>
-          <h3>플랫폼별 시청자 수</h3><p>세 플랫폼의 시청자 수를 오버레이에 함께 표시하고, 각 숫자의 위치를 따로 조절합니다.</p>
+          <h3>플랫폼별 시청자 수</h3><p>플랫폼별 시청자 수를 한 오버레이에 표시하고, 숫자 배지를 각각 옮겨 배치합니다.</p>
           <div class="feature-tags"><span>개별 배치</span><span>위치 저장</span></div>
         </article>
         <article class="feature-card">
@@ -107,12 +112,29 @@
       </div>
     </section>
 
+    <section class="updates-section" id="updates">
+      <div class="container updates-layout">
+        <div class="updates-heading"><p class="eyebrow">LATEST UPDATE · 1.1.1</p><h2>최근 업데이트</h2><p>네 플랫폼 통합 채팅과 방송 중 가독성, 시청자 수 표시를 개선했습니다.</p><a class="text-link" href="CHANGELOG-KO.md">전체 변경 내역 <span aria-hidden="true">↗</span></a></div>
+        <div class="updates-card">
+          <div class="updates-card-top"><span class="updates-version">v1.1.1</span><span>2026.11</span></div>
+          <ul>
+            <li><b>네 플랫폼 통합</b><span>치지직 · YouTube · SOOP · 씨미 채팅을 한 오버레이에서 표시</span></li>
+            <li><b>씨미 채팅 지원</b><span>공개 방송 주소 연결과 이모티콘 표시 처리 개선</span></li>
+            <li><b>시청자 수 유지</b><span>일시 조회 실패 때 마지막 정상 숫자를 화면에 유지</span></li>
+            <li><b>배치·가독성 개선</b><span>YouTube 현재 방송 수치 구분, 배지 자동 정렬 저장, 숫자 칸 높이 통일</span></li>
+            <li><b>방송 중 빠른 조작</b><span>테마, 익명 표시, 위치 저장, 클릭 통과와 단축키 지원</span></li>
+          </ul>
+          <a class="updates-download" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">최신 배포 파일 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
     <section class="guide-section" id="guide">
       <div class="container guide-layout">
         <div class="guide-heading"><p class="eyebrow">QUICK START</p><h2>세 단계로<br>방송에 연결하세요.</h2><p>설치 후 방송 주소를 입력하면 바로 사용할 수 있습니다. Google Cloud 프로젝트나 결제 카드 등록은 필요하지 않습니다.</p><a class="text-link" href="README-KO.txt">한국어 사용 설명서 <span aria-hidden="true">↗</span></a></div>
         <ol class="steps">
-          <li><span class="step-index">01</span><div><h3>다운로드하고 실행</h3><p>최신 ZIP 파일을 받고 압축을 푼 뒤 `치유숲.exe`를 실행합니다.</p><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">GitHub Releases ↗</a></div></li>
-          <li><span class="step-index">02</span><div><h3>방송 주소 입력</h3><p>플랫폼 연결에서 채널 또는 라이브 주소를 넣고 연결합니다.</p><div class="step-tags"><span>치지직</span><span>YouTube</span><span>SOOP</span></div></div></li>
+          <li><span class="step-index">01</span><div><h3>다운로드하고 실행</h3><p>최신 ZIP 파일을 받고 압축을 푼 뒤 치유숲씨.exe를 실행합니다.</p><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">GitHub Releases ↗</a></div></li>
+          <li><span class="step-index">02</span><div><h3>방송 주소 입력</h3><p>플랫폼 연결에서 채널 또는 라이브 주소를 넣고 연결합니다.</p><div class="step-tags"><span>치지직</span><span>YouTube</span><span>SOOP</span><span>씨미</span></div></div></li>
           <li><span class="step-index">03</span><div><h3>오버레이 위치 조절</h3><p>게임 화면에 맞게 채팅창과 플랫폼별 시청자 수 위치를 배치합니다.</p><div class="step-tags"><span>드래그 이동</span><span>설정 저장</span></div></div></li>
         </ol>
       </div>
@@ -120,15 +142,15 @@
 
     <section class="support-section container" id="support">
       <div class="support-icon" aria-hidden="true">i</div>
-      <div class="support-copy"><p class="eyebrow">SERVICE INFORMATION</p><h2>플랫폼 연결 안내</h2><p>채팅은 각 플랫폼의 공개 웹 채팅 연결을 사용하며 별도 중계 서버를 거치지 않습니다. 플랫폼에서 공개 정보를 제공하지 않거나 서비스 연결 방식이 바뀌면 채팅 또는 시청자 수가 표시되지 않을 수 있습니다. 시청자 수는 30초 간격으로 새로 확인합니다.</p></div>
+      <div class="support-copy"><p class="eyebrow">SERVICE INFORMATION</p><h2>플랫폼 연결 안내</h2><p>채팅은 각 플랫폼의 공개 연결 방식을 사용하며 별도 중계 서버를 거치지 않습니다. 공개 정보나 서비스 연결 방식이 바뀌면 채팅 또는 시청자 수가 표시되지 않을 수 있습니다. 시청자 수는 자동으로 다시 확인하며, 일시 조회 실패 때는 마지막 정상 숫자를 화면에 유지합니다.</p></div>
       <a class="support-link" href="README-KO.txt">상세 안내 보기 <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="footer-brand" href="#home"><span aria-hidden="true">✳</span> 치유숲</a>
-      <p>치지직 · YouTube · SOOP 통합 라이브 채팅 오버레이</p>
+      <a class="footer-brand" href="#home"><span aria-hidden="true">✳</span> 치유숲씨</a>
+      <p>치지직 · YouTube · SOOP · 씨미 통합 라이브 채팅 오버레이</p>
       <div class="footer-links"><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">다운로드</a><a href="https://discord.gg/78nkBt5e9S">커뮤니티</a></div>
     </div>
   </footer>
