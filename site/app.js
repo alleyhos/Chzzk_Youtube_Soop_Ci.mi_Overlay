@@ -1,36 +1,8 @@
 (() => {
   const menuButton = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#main-nav');
-  const dialog = document.querySelector('#auth-dialog');
-  const loginButton = document.querySelector('[data-auth-open]');
-  const message = document.querySelector('#auth-message');
-  const tabs = [...document.querySelectorAll('.auth-tab')];
-  const forms = [...document.querySelectorAll('.auth-form')];
-  const signedIn = document.querySelector('#auth-signed-in');
-  const userName = document.querySelector('#auth-user-name');
-  const PASSWORD_ITERATIONS = 310000;
-  let currentUser = null;
-  let activeMode = 'login';
-
-  const base64Url = (bytes) => {
-    let binary = '';
-    for (const byte of bytes) binary += String.fromCharCode(byte);
-    return btoa(binary).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/u, '');
-  };
-
-  const newPasswordSalt = () => base64Url(crypto.getRandomValues(new Uint8Array(16)));
-
-  const derivePasswordProof = async (password, saltText) => {
-    if (password.length < 12 || password.length > 128 || new TextEncoder().encode(password).length > 256) {
-      throw new Error('비밀번호는 12자 이상 128자 이하로 입력해 주세요.');
-    }
-    let encodedSalt = saltText.replaceAll('-', '+').replaceAll('_', '/');
-    encodedSalt += '='.repeat((4 - encodedSalt.length % 4) % 4);
-    const salt = Uint8Array.from(atob(encodedSalt), (character) => character.charCodeAt(0));
-    const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: PASSWORD_ITERATIONS }, material, 256);
-    return base64Url(new Uint8Array(bits));
-  };
+  const form = document.querySelector('#contact-form');
+  const result = document.querySelector('#contact-result');
 
   if (menuButton && nav) {
     menuButton.addEventListener('click', () => {
@@ -48,186 +20,49 @@
     });
   }
 
-  const setMessage = (text, isError = false) => {
-    message.textContent = text;
-    message.classList.toggle('is-visible', Boolean(text));
-    message.classList.toggle('is-error', Boolean(text) && isError);
+  const showResult = (text, isError = false) => {
+    result.textContent = text;
+    result.classList.toggle('is-visible', Boolean(text));
+    result.classList.toggle('is-error', Boolean(text) && isError);
   };
 
-  const setMode = (mode) => {
-    activeMode = mode;
-    setMessage('');
-    tabs.forEach((tab) => {
-      const active = tab.dataset.authMode === mode;
-      tab.classList.toggle('is-active', active);
-      tab.setAttribute('aria-selected', String(active));
-    });
-    document.querySelector('.auth-tabs').hidden = !['login', 'signup'].includes(mode) || Boolean(currentUser);
-    forms.forEach((form) => { form.hidden = form.dataset.formMode !== mode || (Boolean(currentUser) && !['delete', 'reset', 'verify'].includes(mode)); });
-  };
+  const status = new URLSearchParams(location.search).get('contact');
+  if (status === 'sent') showResult('문의가 전달됐습니다. 남겨 주신 이메일로 답변드릴게요.');
+  if (status === 'error') showResult('문의 전송에 실패했습니다. 잠시 뒤 다시 시도해 주세요.', true);
+  if (status) history.replaceState(null, '', `${location.pathname}${location.hash || '#contact'}`);
 
-  const openDialog = () => {
-    if (!dialog) return;
-    setMode(currentUser ? 'login' : activeMode);
-    dialog.showModal();
-  };
-
-  const paintUser = (user, preserveMessage = false) => {
-    const previousMessage = message.textContent;
-    const previousError = message.classList.contains('is-error');
-    currentUser = user || null;
-    loginButton.textContent = currentUser ? currentUser.name : '로그인';
-    loginButton.setAttribute('aria-label', currentUser ? `${currentUser.name} 계정` : '로그인');
-    signedIn.hidden = !currentUser;
-    userName.textContent = currentUser ? currentUser.name : '';
-    document.querySelector('.auth-welcome h2').textContent = currentUser ? '반가워요.' : '다시 만나요.';
-    document.querySelector('.auth-welcome > p:last-child').textContent = currentUser ? '계정이 안전하게 연결되어 있습니다.' : '계정으로 로그인하거나 새로 가입하세요.';
-    setMode(activeMode);
-    if (preserveMessage && previousMessage) setMessage(previousMessage, previousError);
-  };
-
-  const request = async (path, payload) => {
-    const response = await fetch(path, {
-      method: payload ? 'POST' : 'GET',
-      credentials: 'same-origin',
-      headers: payload ? { 'content-type': 'application/json' } : {},
-      body: payload ? JSON.stringify(payload) : undefined,
-    });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || '요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.');
-    return data;
-  };
-
-  loginButton?.addEventListener('click', openDialog);
-  document.querySelectorAll('[data-auth-close]').forEach((button) => button.addEventListener('click', () => dialog.close()));
-  document.querySelectorAll('[data-auth-mode]').forEach((button) => button.addEventListener('click', () => setMode(button.dataset.authMode)));
-  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-  dialog?.addEventListener('close', () => loginButton?.focus());
-
-  const submit = async (form, path, payload, successText, nextMode = null, pendingText = '잠시만 기다려 주세요.') => {
-    const button = form.querySelector('[type="submit"]');
-    button.disabled = true;
-    setMessage(pendingText);
-    try {
-      const requestBody = typeof payload === 'function' ? await payload() : payload;
-      const data = await request(path, requestBody);
-      if (data.user) paintUser(data.user);
-      if (nextMode) setMode(nextMode);
-      setMessage(data.message || successText);
-      if (data.user) window.setTimeout(() => dialog.close(), 650);
-    } catch (error) {
-      setMessage(error.message, true);
-    } finally {
-      button.disabled = false;
-    }
-  };
-
-  document.querySelector('#login-form')?.addEventListener('submit', (event) => {
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/login', async () => {
-      const email = String(values.get('email') || '');
-      const password = String(values.get('password') || '');
-      const params = await request('/api/auth/password-params', { email });
-      return { email, passwordProof: await derivePasswordProof(password, params.salt) };
-    }, '로그인되었습니다.', null, '비밀번호를 안전하게 확인하고 있습니다.');
-  });
-  document.querySelector('#signup-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/register', async () => {
-      const password = String(values.get('password') || '');
-      if (password !== String(values.get('passwordConfirm') || '')) throw new Error('비밀번호 확인이 일치하지 않습니다.');
-      const passwordSalt = newPasswordSalt();
-      return {
-        name: values.get('name'), email: values.get('email'), passwordSalt,
-        passwordProof: await derivePasswordProof(password, passwordSalt), consent: values.get('consent') === 'on',
-      };
-    }, '인증 메일을 보냈습니다. 이메일에서 가입을 완료해 주세요.', null, '비밀번호를 안전하게 준비하고 있습니다.');
-  });
-  document.querySelector('#forgot-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/forgot-password', { email: values.get('email') }, '해당 주소로 계정이 있다면 재설정 메일을 보냈습니다.');
-  });
-  document.querySelector('#resend-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/resend-verification', { email: values.get('email') }, '인증이 필요한 계정이라면 메일을 보냈습니다.');
-  });
-  document.querySelector('#reset-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/reset-password', async () => {
-      const password = String(values.get('password') || '');
-      if (password !== String(values.get('passwordConfirm') || '')) throw new Error('비밀번호 확인이 일치하지 않습니다.');
-      const passwordSalt = newPasswordSalt();
-      return {
-        token: values.get('token'), passwordSalt,
-        passwordProof: await derivePasswordProof(password, passwordSalt),
-      };
-    }, '비밀번호가 변경되었습니다. 로그인해 주세요.', 'login', '새 비밀번호를 안전하게 준비하고 있습니다.');
-  });
-  document.querySelector('#verify-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = new FormData(form);
-    submit(form, '/api/auth/verify', { token: values.get('token') }, '이메일 인증이 완료되었습니다. 로그인해 주세요.', 'login');
-  });
-  document.querySelector('#auth-logout')?.addEventListener('click', async (event) => {
-    const button = event.currentTarget;
-    button.disabled = true;
-    try {
-      await request('/api/auth/logout', {});
-      paintUser(null);
-      setMessage('로그아웃했습니다.');
-    } catch (error) {
-      setMessage(error.message, true);
-    } finally {
-      button.disabled = false;
-    }
-  });
-  document.querySelector('#delete-form')?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!window.confirm('계정을 영구 삭제할까요?')) return;
-    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
     const button = form.querySelector('[type="submit"]');
     const values = new FormData(form);
+    const payload = {
+      name: values.get('name'),
+      email: values.get('email'),
+      topic: values.get('topic'),
+      message: values.get('message'),
+      consent: values.get('consent') === 'on',
+      website: values.get('website'),
+    };
     button.disabled = true;
-    setMessage('계정을 삭제하고 있습니다.');
+    form.setAttribute('aria-busy', 'true');
+    showResult('문의 내용을 보내고 있습니다.');
     try {
-      const passwordParams = await request('/api/auth/password-params', { email: currentUser.email });
-      const passwordProof = await derivePasswordProof(String(values.get('password') || ''), passwordParams.salt);
-      await request('/api/auth/delete-account', { passwordProof });
-      paintUser(null);
-      setMode('login');
-      setMessage('계정과 저장된 로그인 정보가 삭제되었습니다.');
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        credentials: 'omit',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || '문의 전송에 실패했습니다. 잠시 뒤 다시 시도해 주세요.');
+      form.reset();
+      showResult(data.message || '문의가 전달됐습니다. 남겨 주신 이메일로 답변드릴게요.');
     } catch (error) {
-      setMessage(error.message, true);
+      showResult(error.message || '문의 전송에 실패했습니다. 잠시 뒤 다시 시도해 주세요.', true);
     } finally {
       button.disabled = false;
+      form.removeAttribute('aria-busy');
     }
   });
-
-  const hashParams = new URLSearchParams(window.location.hash.slice(1));
-  if (hashParams.has('reset')) {
-    const resetForm = document.querySelector('#reset-form');
-    resetForm.elements.token.value = hashParams.get('reset') || '';
-    activeMode = 'reset';
-    openDialog();
-    history.replaceState(null, '', `${location.pathname}${location.search}`);
-  } else if (hashParams.has('verify')) {
-    document.querySelector('#verify-form').elements.token.value = hashParams.get('verify') || '';
-    activeMode = 'verify';
-    openDialog();
-    setMessage('이메일 인증을 완료하려면 아래 버튼을 눌러 주세요.');
-    history.replaceState(null, '', `${location.pathname}${location.search}`);
-  }
-
-  request('/api/auth/session').then((data) => paintUser(data.user, true)).catch(() => paintUser(null, true));
 })();

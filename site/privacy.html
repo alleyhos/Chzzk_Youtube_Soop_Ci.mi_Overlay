@@ -1,21 +1,25 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f5f6f2">
-  <title>계정 데이터 안내 · 치유숲씨</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%231d3730'/%3E%3Cpath d='M17 16h30v25H33L21 50v-9h-4z' fill='none' stroke='%23b9e5cd' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E"><link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>문의 데이터 안내 · 치유숲씨</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%231d3730'/%3E%3Cpath d='M17 16h30v25H33L21 50v-9h-4z' fill='none' stroke='%23b9e5cd' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">치유숲씨<small>LIVE CHAT, IN ONE PLACE</small></span></a><a class="download-button" href="/">홈으로 <span aria-hidden="true">↗</span></a></div></header>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">치유숲씨<small>LIVE CHAT, IN ONE PLACE</small></span></a><a class="download-button" href="/#contact">문의하기 <span aria-hidden="true">↗</span></a></div></header>
   <main class="policy-page">
-    <p class="eyebrow">ACCOUNT INFORMATION · 2026-11-04</p>
-    <h1>계정 데이터 안내</h1>
-    <p class="policy-lede">치유숲씨 웹사이트 계정을 만들 때 필요한 정보와 사용 방식을 안내합니다.</p>
-    <section><h2>수집하는 정보</h2><ul><li>회원가입 때 입력한 이름과 이메일 주소</li><li>로그인 보안을 위해 브라우저에서 PBKDF2-SHA256으로 계산하고 서버 비밀키로 다시 보호한 비밀번호 검증값과 세션 토큰</li><li>자동 가입·로그인 제한을 위해 해시 처리한 접속 주소와 이메일 조합 (마지막 요청 이후 24시간이 지나면 다음 인증 요청 때 정리)</li></ul></section>
-    <section><h2>사용 목적</h2><p>회원 계정 관리, 이메일 인증, 로그인 유지, 비밀번호 재설정, 비정상적인 가입·로그인 요청 제한에 사용합니다. 비밀번호 원문은 브라우저에서 검증값을 계산한 뒤 서버로 전송하거나 저장하지 않습니다.</p></section>
-    <section><h2>저장과 이메일 발송</h2><p>계정 정보와 인증 토큰은 Cloudflare D1 데이터베이스에 저장합니다. 로그인 세션은 30일 만료의 HttpOnly·Secure·SameSite 쿠키로 유지합니다. 인증 및 비밀번호 재설정 메일은 Resend를 통해 전달하며, 메일 발송에 필요한 이메일 주소와 메일 내용이 Resend에 전송됩니다. 메일 API 키는 Cloudflare의 비밀 설정에 보관합니다.</p></section>
-    <section><h2>보관과 삭제</h2><p>계정 정보는 계정이 유지되는 동안 보관합니다. 로그인 창의 회원 탈퇴를 누르면 현재 비밀번호를 확인한 뒤 계정, 세션, 인증 토큰을 삭제합니다. 만료되거나 사용한 인증 토큰과 오래된 보안 제한 기록은 정리합니다.</p></section>
-    <section><h2>문의</h2><p>계정 관련 문의는 <a href="https://discord.gg/78nkBt5e9S" target="_blank" rel="noopener noreferrer">Discord 커뮤니티</a> 또는 <a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/issues/new" target="_blank" rel="noopener noreferrer">GitHub 문의</a>로 보내주세요. 문의 글에는 비밀번호나 인증 링크를 적지 마세요.</p></section>
-    <a class="guide-link" href="/">치유숲씨 홈으로 <span aria-hidden="true">↗</span></a>
+    <p class="eyebrow">CONTACT INFORMATION · 2026-11-04</p>
+    <h1>문의 데이터 안내</h1>
+    <p class="policy-lede">사이트 문의 양식에서 입력한 정보가 답변을 위해 어떻게 전달되는지 안내합니다.</p>
+    <section><h2>받는 정보</h2><p>이름 또는 닉네임, 답변 받을 이메일, 문의 종류와 문의 내용을 받습니다. 사이트 회원가입이나 로그인을 요구하지 않습니다.</p></section>
+    <section><h2>전달과 보관</h2><p>문의 내용과 이메일은 Resend를 거쳐 운영자가 지정한 메일 주소로 전달됩니다. 웹사이트의 문의 데이터베이스에는 문의 본문이나 이메일을 저장하지 않습니다. 운영자 메일함의 문의는 답변과 지원 처리에 필요한 동안 보관되며, 메일 제공자의 처리 정책도 적용됩니다.</p></section>
+    <section><h2>스팸 방지 기록</h2><p>반복 문의를 제한하기 위해 접속 주소를 해시 처리한 제한 키를 Cloudflare D1에 저장합니다. 원래 접속 주소는 이 제한 테이블에 저장하지 않으며, 제한 기록은 마지막 요청 후 24시간이 지나면 다음 문의 요청 때 정리됩니다.</p></section>
+    <section><h2>문의 데이터 요청</h2><p>문의 정보의 정정이나 삭제를 요청하려면 사이트 문의 양식에 해당 내용을 적어 보내 주세요. 민감한 개인정보, 인증 번호, 결제 정보는 문의에 적지 마세요.</p></section>
+    <section><h2>외부 서비스</h2><p>사이트와 제한 기록은 Cloudflare가 처리하고, 문의 메일은 Resend가 전달합니다. 문의를 보낼 때 이름, 답변 이메일과 문의 내용이 해당 서비스에 전달될 수 있습니다.</p></section>
+    <a class="guide-link" href="/#contact">치유숲씨 문의하기 <span aria-hidden="true">↗</span></a>
   </main>
   <footer class="site-footer policy-footer"><div class="footer-bottom"><span>© 2026 치유숲씨</span><a href="/">홈</a></div></footer>
 </body>

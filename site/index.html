@@ -28,7 +28,7 @@
         <a href="#about">앱 소개</a><a href="#release">업데이트</a><a href="#start">사용 방법</a><a href="#contact">문의</a>
       </nav>
       <div class="header-actions">
-        <button class="login-button" type="button" data-auth-open>로그인</button>
+        <a class="contact-button" href="#contact">문의하기</a>
         <a class="download-button" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">다운로드 <span aria-hidden="true">↗</span></a>
       </div>
     </div>
@@ -119,67 +119,21 @@
     </section>
 
     <section class="contact-section" id="contact">
-      <div class="contact-heading"><p class="eyebrow">문의와 피드백</p><h2>사용 중 막히는 부분이 있나요?</h2><p>빠르게 이야기할 땐 Discord, 오류나 개선 제안은 GitHub에 남겨주세요.</p></div>
-      <div class="contact-cards"><a class="contact-card discord-card" href="https://discord.gg/78nkBt5e9S" target="_blank" rel="noopener noreferrer"><span class="contact-card-icon" aria-hidden="true">◌</span><span class="contact-card-copy"><b>Discord 커뮤니티</b><small>질문하고 다른 사용자와 이야기하기</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a><a class="contact-card github-card" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/issues/new" target="_blank" rel="noopener noreferrer"><span class="contact-card-icon" aria-hidden="true">⌘</span><span class="contact-card-copy"><b>오류 · 개선 제안</b><small>재현 방법과 함께 GitHub에 남기기</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a></div>
-      <p class="contact-footnote">로그인 비밀번호나 인증 코드는 문의 글에 적지 마세요.</p>
+      <div class="contact-heading"><p class="eyebrow">문의와 피드백</p><h2>직접 이야기해 주세요.</h2><p>오류 제보, 사용 질문, 개선 아이디어를 이곳에서 보낼 수 있습니다. 답변을 받을 이메일 주소를 남겨 주세요.</p><div class="contact-response-note"><span class="response-dot" aria-hidden="true"></span><span>문의 내용은 운영자 메일로 전달됩니다.<br><small>로그인 없이 작성할 수 있어요.</small></span></div></div>
+      <form class="contact-form" id="contact-form" action="/api/contact" method="post" autocomplete="on">
+        <div class="contact-form-row"><label>이름<input name="name" type="text" autocomplete="name" maxlength="60" required placeholder="이름 또는 닉네임"></label><label>답변 받을 이메일<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label></div>
+        <label>문의 종류<select name="topic" required><option value="" selected disabled>선택해 주세요</option><option value="사용 문의">사용 문의</option><option value="오류 제보">오류 제보</option><option value="기능 제안">기능 제안</option><option value="기타">기타</option></select></label>
+        <label>내용<textarea name="message" rows="6" minlength="10" maxlength="4000" required placeholder="상황과 함께 적어 주시면 확인하는 데 도움이 됩니다."></textarea></label>
+        <label class="contact-consent"><input name="consent" type="checkbox" required><span><a href="privacy.html" target="_blank" rel="noopener noreferrer">문의 데이터 안내</a>를 확인했고, 답변을 위한 이메일 전달에 동의합니다.</span></label>
+        <label class="contact-honey" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        <button class="button button-dark contact-submit" type="submit">문의 보내기 <span aria-hidden="true">↗</span></button>
+        <p class="contact-result" id="contact-result" role="status" aria-live="polite"></p>
+      </form>
+      <div class="contact-links"><a class="contact-card discord-card" href="https://discord.gg/78nkBt5e9S" target="_blank" rel="noopener noreferrer"><span class="contact-card-icon" aria-hidden="true">◌</span><span class="contact-card-copy"><b>Discord 커뮤니티</b><small>다른 사용자와 이야기하기</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a><a class="contact-card github-card" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/issues/new" target="_blank" rel="noopener noreferrer"><span class="contact-card-icon" aria-hidden="true">⌘</span><span class="contact-card-copy"><b>GitHub 오류 제보</b><small>재현 방법과 개선 제안 남기기</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a></div>
+      <p class="contact-footnote">민감한 개인정보, 인증 번호, 결제 정보는 문의에 적지 마세요.</p>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="#home"><span class="brand-mark small-mark" aria-hidden="true">✳</span><b>치유숲씨</b></a><p>치지직 · YouTube · SOOP · 씨미 통합 라이브 채팅 오버레이</p><div class="footer-links"><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">다운로드</a><a href="#contact">문의</a><a href="privacy.html">계정 데이터</a></div></div><div class="footer-bottom"><span>© 2026 치유숲씨</span><a href="README-KO.txt">이용 안내</a></div></footer>
-
-  <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
-    <div class="auth-panel">
-      <button class="auth-close" type="button" data-auth-close aria-label="닫기">×</button>
-      <div class="auth-brand"><span class="brand-mark" aria-hidden="true">✳</span><span>치유숲씨 계정</span></div>
-      <div class="auth-welcome"><p class="eyebrow">MEMBER</p><h2 id="auth-title">다시 만나요.</h2><p>계정으로 로그인하거나 새로 가입하세요.</p></div>
-      <div class="auth-tabs" role="tablist" aria-label="계정 메뉴"><button type="button" class="auth-tab is-active" data-auth-mode="login" role="tab" aria-selected="true">로그인</button><button type="button" class="auth-tab" data-auth-mode="signup" role="tab" aria-selected="false">회원가입</button></div>
-      <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
-      <div class="auth-signed-in" id="auth-signed-in" hidden><p><b id="auth-user-name"></b>님, 로그인되어 있습니다.</p><button class="button button-dark auth-submit" type="button" id="auth-logout">로그아웃</button><button class="forgot-link delete-account-link" type="button" data-auth-mode="delete">회원 탈퇴</button></div>
-      <form class="auth-form" id="login-form" data-form-mode="login">
-        <label>이메일<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-        <label>비밀번호<input name="password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required></label>
-        <button class="button button-dark auth-submit" type="submit">로그인</button>
-        <div class="auth-helper-links"><button class="forgot-link" type="button" data-auth-mode="forgot">비밀번호 재설정</button><button class="forgot-link" type="button" data-auth-mode="resend">인증 메일 재전송</button></div>
-      </form>
-      <form class="auth-form" id="signup-form" data-form-mode="signup" hidden>
-        <label>이름<input name="name" type="text" autocomplete="name" minlength="2" maxlength="40" required></label>
-        <label>이메일<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-        <label>비밀번호<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><small>12자 이상 입력해 주세요.</small></label>
-        <label>비밀번호 확인<input name="passwordConfirm" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
-        <label class="consent-label"><input name="consent" type="checkbox" required><span><a href="privacy.html" target="_blank" rel="noopener noreferrer">계정 데이터 안내</a>를 확인했고, 이메일과 이름을 계정 운영에 사용하는 데 동의합니다.</span></label>
-        <button class="button button-dark auth-submit" type="submit">인증 메일 보내기</button>
-      </form>
-      <form class="auth-form" id="forgot-form" data-form-mode="forgot" hidden>
-        <p class="form-help">가입한 이메일로 비밀번호 재설정 링크를 보내드립니다.</p>
-        <label>이메일<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-        <button class="button button-dark auth-submit" type="submit">재설정 메일 보내기</button>
-        <button class="forgot-link" type="button" data-auth-mode="login">로그인으로 돌아가기</button>
-      </form>
-      <form class="auth-form" id="resend-form" data-form-mode="resend" hidden>
-        <p class="form-help">가입할 때 사용한 이메일로 인증 링크를 다시 보냅니다.</p>
-        <label>이메일<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-        <button class="button button-dark auth-submit" type="submit">인증 메일 재전송</button>
-        <button class="forgot-link" type="button" data-auth-mode="login">로그인으로 돌아가기</button>
-      </form>
-      <form class="auth-form" id="reset-form" data-form-mode="reset" hidden>
-        <input name="token" type="hidden">
-        <label>새 비밀번호<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><small>12자 이상 입력해 주세요.</small></label>
-        <label>새 비밀번호 확인<input name="passwordConfirm" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
-        <button class="button button-dark auth-submit" type="submit">비밀번호 변경</button>
-      </form>
-      <form class="auth-form" id="verify-form" data-form-mode="verify" hidden>
-        <input name="token" type="hidden">
-        <p class="form-help">가입한 이메일 주소를 확인하고 아래 버튼을 눌러 주세요.</p>
-        <button class="button button-dark auth-submit" type="submit">이메일 인증 완료</button>
-      </form>
-      <form class="auth-form" id="delete-form" data-form-mode="delete" hidden>
-        <p class="form-help">계정을 삭제하면 이름, 이메일, 로그인 세션도 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</p>
-        <label>현재 비밀번호<input name="password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required></label>
-        <button class="button button-dark auth-submit" type="submit">계정 영구 삭제</button>
-        <button class="forgot-link" type="button" data-auth-mode="login">취소</button>
-      </form>
-      <p class="auth-privacy">인증 메일이 오지 않으면 스팸함을 확인해 주세요.</p>
-    </div>
-  </dialog>
+  <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="#home"><span class="brand-mark small-mark" aria-hidden="true">✳</span><b>치유숲씨</b></a><p>치지직 · YouTube · SOOP · 씨미 통합 라이브 채팅 오버레이</p><div class="footer-links"><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">다운로드</a><a href="#contact">문의</a><a href="privacy.html">문의 데이터 안내</a></div></div><div class="footer-bottom"><span>© 2026 치유숲씨</span><a href="README-KO.txt">이용 안내</a></div></footer>
 </body>
 </html>
