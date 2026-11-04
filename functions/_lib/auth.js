@@ -1,6 +1,5 @@
 const SESSION_COOKIE = "chiyusup_session";
 const SESSION_SECONDS = 60 * 60 * 24 * 30;
-const PASSWORD_ITERATIONS = 310000;
 
 export function json(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data), {
@@ -65,13 +64,26 @@ function toBase64Url(bytes) {
   return btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/u, "");
 }
 
-export async function passwordDigest(password, saltText) {
-  let encodedSalt = saltText.replaceAll("-", "+").replaceAll("_", "/");
-  encodedSalt += "=".repeat((4 - encodedSalt.length % 4) % 4);
-  const salt = Uint8Array.from(atob(encodedSalt), (c) => c.charCodeAt(0));
-  const material = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt, iterations: PASSWORD_ITERATIONS }, material, 256);
-  return toBase64Url(new Uint8Array(bits));
+export function validPasswordSalt(value) {
+  return typeof value === "string" && /^[A-Za-z0-9_-]{22}$/u.test(value);
+}
+
+export function validPasswordProof(value) {
+  return typeof value === "string" && /^[A-Za-z0-9_-]{43}$/u.test(value);
+}
+
+export async function passwordVerifier(proof, pepper) {
+  if (!validPasswordProof(proof) || typeof pepper !== "string" || pepper.length < 32) return null;
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(pepper), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(proof));
+  return toBase64Url(new Uint8Array(signature));
+}
+
+export async function fallbackPasswordSalt(email, pepper) {
+  if (typeof pepper !== "string" || pepper.length < 32) return null;
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(pepper), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`password-salt|${email}`));
+  return toBase64Url(new Uint8Array(signature).slice(0, 16));
 }
 
 export function equalSecret(left, right) {
@@ -81,12 +93,6 @@ export function equalSecret(left, right) {
   const length = Math.max(a.length, b.length);
   for (let index = 0; index < length; index += 1) difference |= (a[index] || 0) ^ (b[index] || 0);
   return difference === 0;
-}
-
-export async function makePassword(password) {
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const saltText = toBase64Url(salt);
-  return { salt: saltText, digest: await passwordDigest(password, saltText) };
 }
 
 export function validEmail(email) {

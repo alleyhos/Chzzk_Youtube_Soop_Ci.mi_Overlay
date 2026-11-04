@@ -8,8 +8,29 @@
   const forms = [...document.querySelectorAll('.auth-form')];
   const signedIn = document.querySelector('#auth-signed-in');
   const userName = document.querySelector('#auth-user-name');
+  const PASSWORD_ITERATIONS = 310000;
   let currentUser = null;
   let activeMode = 'login';
+
+  const base64Url = (bytes) => {
+    let binary = '';
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/u, '');
+  };
+
+  const newPasswordSalt = () => base64Url(crypto.getRandomValues(new Uint8Array(16)));
+
+  const derivePasswordProof = async (password, saltText) => {
+    if (password.length < 12 || password.length > 128 || new TextEncoder().encode(password).length > 256) {
+      throw new Error('비밀번호는 12자 이상 128자 이하로 입력해 주세요.');
+    }
+    let encodedSalt = saltText.replaceAll('-', '+').replaceAll('_', '/');
+    encodedSalt += '='.repeat((4 - encodedSalt.length % 4) % 4);
+    const salt = Uint8Array.from(atob(encodedSalt), (character) => character.charCodeAt(0));
+    const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: PASSWORD_ITERATIONS }, material, 256);
+    return base64Url(new Uint8Array(bits));
+  };
 
   if (menuButton && nav) {
     menuButton.addEventListener('click', () => {
@@ -83,12 +104,13 @@
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
   dialog?.addEventListener('close', () => loginButton?.focus());
 
-  const submit = async (form, path, payload, successText, nextMode = null) => {
+  const submit = async (form, path, payload, successText, nextMode = null, pendingText = '잠시만 기다려 주세요.') => {
     const button = form.querySelector('[type="submit"]');
     button.disabled = true;
-    setMessage('잠시만 기다려 주세요.');
+    setMessage(pendingText);
     try {
-      const data = await request(path, payload);
+      const requestBody = typeof payload === 'function' ? await payload() : payload;
+      const data = await request(path, requestBody);
       if (data.user) paintUser(data.user);
       if (nextMode) setMode(nextMode);
       setMessage(data.message || successText);
@@ -104,13 +126,26 @@
     event.preventDefault();
     const form = event.currentTarget;
     const values = new FormData(form);
-    submit(form, '/api/auth/login', { email: values.get('email'), password: values.get('password') }, '로그인되었습니다.');
+    submit(form, '/api/auth/login', async () => {
+      const email = String(values.get('email') || '');
+      const password = String(values.get('password') || '');
+      const params = await request('/api/auth/password-params', { email });
+      return { email, passwordProof: await derivePasswordProof(password, params.salt) };
+    }, '로그인되었습니다.', null, '비밀번호를 안전하게 확인하고 있습니다.');
   });
   document.querySelector('#signup-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const values = new FormData(form);
-    submit(form, '/api/auth/register', { name: values.get('name'), email: values.get('email'), password: values.get('password'), passwordConfirm: values.get('passwordConfirm'), consent: values.get('consent') === 'on' }, '인증 메일을 보냈습니다. 이메일에서 가입을 완료해 주세요.');
+    submit(form, '/api/auth/register', async () => {
+      const password = String(values.get('password') || '');
+      if (password !== String(values.get('passwordConfirm') || '')) throw new Error('비밀번호 확인이 일치하지 않습니다.');
+      const passwordSalt = newPasswordSalt();
+      return {
+        name: values.get('name'), email: values.get('email'), passwordSalt,
+        passwordProof: await derivePasswordProof(password, passwordSalt), consent: values.get('consent') === 'on',
+      };
+    }, '인증 메일을 보냈습니다. 이메일에서 가입을 완료해 주세요.', null, '비밀번호를 안전하게 준비하고 있습니다.');
   });
   document.querySelector('#forgot-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -128,7 +163,15 @@
     event.preventDefault();
     const form = event.currentTarget;
     const values = new FormData(form);
-    submit(form, '/api/auth/reset-password', { token: values.get('token'), password: values.get('password'), passwordConfirm: values.get('passwordConfirm') }, '비밀번호가 변경되었습니다. 로그인해 주세요.', 'login');
+    submit(form, '/api/auth/reset-password', async () => {
+      const password = String(values.get('password') || '');
+      if (password !== String(values.get('passwordConfirm') || '')) throw new Error('비밀번호 확인이 일치하지 않습니다.');
+      const passwordSalt = newPasswordSalt();
+      return {
+        token: values.get('token'), passwordSalt,
+        passwordProof: await derivePasswordProof(password, passwordSalt),
+      };
+    }, '비밀번호가 변경되었습니다. 로그인해 주세요.', 'login', '새 비밀번호를 안전하게 준비하고 있습니다.');
   });
   document.querySelector('#verify-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -158,7 +201,9 @@
     button.disabled = true;
     setMessage('계정을 삭제하고 있습니다.');
     try {
-      await request('/api/auth/delete-account', { password: values.get('password') });
+      const passwordParams = await request('/api/auth/password-params', { email: currentUser.email });
+      const passwordProof = await derivePasswordProof(String(values.get('password') || ''), passwordParams.salt);
+      await request('/api/auth/delete-account', { passwordProof });
       paintUser(null);
       setMode('login');
       setMessage('계정과 저장된 로그인 정보가 삭제되었습니다.');

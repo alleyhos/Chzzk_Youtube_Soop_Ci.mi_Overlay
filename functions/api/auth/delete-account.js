@@ -1,4 +1,4 @@
-import { equalSecret, fail, json, passwordDigest, rateLimit, readJson, sessionData, sessionCookie, validateOrigin } from "../../_lib/auth.js";
+import { equalSecret, fail, json, passwordVerifier, rateLimit, readJson, sessionData, sessionCookie, validateOrigin, validPasswordProof } from "../../_lib/auth.js";
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return fail("회원 데이터베이스 설정이 아직 완료되지 않았습니다.", 503);
@@ -8,10 +8,11 @@ export async function onRequestPost({ request, env }) {
   const session = await sessionData(env.DB, request);
   if (!session) return fail("로그인이 필요합니다.", 401);
   if (!(await rateLimit(env.DB, request, "delete-account", 5, 3600, session.email))) return fail("요청이 많습니다. 잠시 뒤 다시 시도해 주세요.", 429);
-  const password = String(body.password || "");
-  if (!password || password.length > 128) return fail("현재 비밀번호를 확인해 주세요.", 400);
+  const passwordProof = String(body.passwordProof || "");
+  if (!validPasswordProof(passwordProof)) return fail("현재 비밀번호를 확인해 주세요.", 400);
+  if (!env.PASSWORD_PEPPER || env.PASSWORD_PEPPER.length < 32) return fail("Cloudflare의 비밀번호 보호 설정이 필요합니다.", 503);
   const user = await env.DB.prepare("SELECT id, password_salt, password_hash FROM users WHERE id = ?").bind(session.user_id).first();
-  const digest = await passwordDigest(password, user.password_salt);
+  const digest = await passwordVerifier(passwordProof, env.PASSWORD_PEPPER);
   if (!equalSecret(digest, user.password_hash)) return fail("현재 비밀번호가 맞지 않습니다.", 401);
   await env.DB.batch([
     env.DB.prepare("DELETE FROM auth_sessions WHERE user_id = ?").bind(user.id),

@@ -33,8 +33,21 @@ Resend에서 발송 전용 API 키를 만들고, Cloudflare Pages 프로젝트�
 | `SITE_URL` | Variable | `https://www.xn--om2b15fvyfwod99ae5b7qz45b.xn--h32bi4v.xn--3e0b707e` (사용자가 알려준 사이트 주소. Cloudflare에 등록한 주소와 다르면 실제 주소로 교체) |
 | `MAIL_FROM` | Variable | 인증된 발신자. 예: `치유숲씨 <account@mail.내도메인>` |
 | `RESEND_API_KEY` | Secret | Resend 발송 전용 API 키 |
+| `PASSWORD_PEPPER` | Secret | 아래 PowerShell 명령으로 생성한 무작위 비밀키 |
 
 `RESEND_API_KEY`는 GitHub 파일이나 코드에 넣지 마세요. Cloudflare의 Secret 입력란에만 저장합니다. Preview 환경에서도 시험하려면 Preview에도 같은 종류의 binding과 변수를 따로 설정해야 합니다.
+
+`PASSWORD_PEPPER`도 소스 코드, GitHub, 채팅에 올리지 마세요. PowerShell에서 다음 명령으로 생성하고 결과를 Cloudflare Secret에 직접 붙여 넣으세요.
+
+이 비밀키를 교체하거나 잃어버리면 기존 계정 비밀번호 검증값과 맞지 않아 가입자가 다시 비밀번호를 설정해야 합니다. 안전한 비밀 저장소에 백업해 두세요.
+
+```powershell
+$bytes = New-Object byte[] 32
+$rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+$rng.GetBytes($bytes)
+[Convert]::ToBase64String($bytes)
+$rng.Dispose()
+```
 
 Resend는 소유한 발신 도메인을 추가하고 DNS 레코드 인증을 끝내야 가입자에게 메일을 보낼 수 있습니다. 메일 발송 전용 서브도메인(예: `mail.내도메인`)을 Resend에 추가하고, 안내된 메일용 DNS 레코드만 도메인 관리 화면에 등록하세요. 웹사이트 연결용 `CNAME`은 그대로 두세요. 도메인 인증이 끝나면 해당 서브도메인의 주소를 `MAIL_FROM`에 넣고 발송 전용 API 키를 만드세요.
 
@@ -45,6 +58,7 @@ D1 binding과 메일 변수를 모두 저장한 뒤 Cloudflare Pages에서 새 �
 ## 계정 API
 
 - `POST /api/auth/register`: 가입 및 인증 메일 발송
+- `POST /api/auth/password-params`: 로그인 비밀번호 검증용 salt 조회
 - `POST /api/auth/login`: 로그인
 - `GET /api/auth/session`: 로그인 상태 확인
 - `POST /api/auth/logout`: 로그아웃
@@ -54,10 +68,10 @@ D1 binding과 메일 변수를 모두 저장한 뒤 Cloudflare Pages에서 새 �
 - `POST /api/auth/reset-password`: 비밀번호 재설정
 - `POST /api/auth/delete-account`: 재인증 후 계정 삭제
 
-비밀번호는 PBKDF2-SHA256으로 해시하여 저장하고, 브라우저에는 HttpOnly·Secure·SameSite 쿠키로 세션을 유지합니다. 가입 이름과 이메일, 이메일 인증 상태, 보안 기록을 사용하며, 계정 데이터 안내는 `site/privacy.html`에 공개되어 있습니다.
+비밀번호 원문은 서버로 보내지 않습니다. 브라우저가 PBKDF2-SHA256 310,000회로 검증값을 만들고, 서버는 Cloudflare Secret의 `PASSWORD_PEPPER`로 HMAC 처리한 값만 D1에 저장합니다. 브라우저에는 HttpOnly·Secure·SameSite 쿠키로 세션을 유지합니다. 가입 이름과 이메일, 이메일 인증 상태, 보안 기록을 사용하며, 계정 데이터 안내는 `site/privacy.html`에 공개되어 있습니다.
 
 ## 무료 실행 한도 확인
 
-Cloudflare Workers Free는 HTTP 요청 한 건의 CPU 실행 시간이 10ms로 제한됩니다. Cloudflare 문서도 인증처럼 계산량이 큰 요청은 10–20ms를 쓸 수 있다고 안내합니다. 이 구현은 비밀번호 보호에 PBKDF2-SHA256 310,000회를 사용하므로 무료 한도에서 가입·로그인이 `1102 Worker exceeded resource limits`로 실패할 수 있습니다. 배포 후 가입과 로그인을 확인하고, 오류가 나면 CPU 한도를 늘릴 수 있는 Workers 유료 플랜을 사용하거나 비밀번호 없는 이메일 링크 로그인으로 전환해야 합니다. 요금제 확인 전에는 로그인 기능이 실제로 동작한다고 안내하지 마세요.
+Cloudflare Workers Free는 HTTP 요청 한 건의 CPU 실행 시간이 10ms로 제한됩니다. 이 구현에서는 PBKDF2 계산을 방문자의 브라우저에서 수행하고, 서버에는 가벼운 HMAC 검증만 맡겨 이 한도를 고려했습니다. Cloudflare 문서상 인증 요청은 일반적으로 10–20ms를 쓸 수 있으므로 실제 배포 후 가입·로그인을 확인하고 Workers 지표에서 CPU 한도 오류가 없는지 살펴보세요.
 
 Cloudflare 문서: [CPU 시간 제한](https://developers.cloudflare.com/workers/platform/limits/#cpu-time)

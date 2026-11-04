@@ -1,4 +1,4 @@
-import { createEmailToken, fail, json, makePassword, normalizeName, normalizedEmail, rateLimit, readJson, sendAuthEmail, sha256, validateOrigin, validEmail } from "../../_lib/auth.js";
+import { createEmailToken, fail, json, normalizeName, normalizedEmail, passwordVerifier, rateLimit, readJson, sendAuthEmail, sha256, validEmail, validPasswordProof, validPasswordSalt, validateOrigin } from "../../_lib/auth.js";
 
 const PRIVACY_VERSION = "2026-11-04";
 const TOKEN_LIFETIME = 30 * 60;
@@ -15,15 +15,14 @@ export async function onRequestPost({ request, env }) {
 
   const name = normalizeName(body.name);
   const email = normalizedEmail(body.email);
-  const password = String(body.password || "");
-  const passwordConfirm = String(body.passwordConfirm || "");
+  const passwordSalt = String(body.passwordSalt || "");
+  const passwordProof = String(body.passwordProof || "");
   if ([...name].length < 2 || [...name].length > 40) return fail("이름은 2자 이상 40자 이하로 입력해 주세요.");
   if (!validEmail(email)) return fail("이메일 주소를 확인해 주세요.");
-  if (password.length < 12 || password.length > 128) return fail("비밀번호는 12자 이상 128자 이하로 입력해 주세요.");
-  if (password !== passwordConfirm) return fail("비밀번호 확인이 일치하지 않습니다.");
-  if (new TextEncoder().encode(password).length > 256) return fail("비밀번호가 너무 깁니다.");
+  if (!validPasswordSalt(passwordSalt) || !validPasswordProof(passwordProof)) return fail("비밀번호 확인 정보를 다시 입력해 주세요.");
   if (body.consent !== true) return fail("계정 데이터 안내에 동의해 주세요.");
   if (!(await rateLimit(env.DB, request, "register", 5, 3600))) return fail("가입 요청이 많습니다. 한 시간 뒤 다시 시도해 주세요.", 429);
+  if (!env.PASSWORD_PEPPER || env.PASSWORD_PEPPER.length < 32) return fail("Cloudflare의 비밀번호 보호 설정이 필요합니다.", 503);
   if (!env.SITE_URL || !env.RESEND_API_KEY || !env.MAIL_FROM) return fail("Cloudflare의 사이트 주소와 인증 메일 설정이 필요합니다.", 503);
 
   const existing = await env.DB.prepare("SELECT id, email_verified_at FROM users WHERE email = ?").bind(email).first();
@@ -44,11 +43,12 @@ export async function onRequestPost({ request, env }) {
 
   const id = crypto.randomUUID();
   const now = Math.floor(Date.now() / 1000);
-  const credentials = await makePassword(password);
+  const passwordHash = await passwordVerifier(passwordProof, env.PASSWORD_PEPPER);
+  if (!passwordHash) return fail("비밀번호 확인 정보를 다시 입력해 주세요.");
   try {
     await env.DB.prepare(`INSERT INTO users (id, email, display_name, password_salt, password_hash, privacy_version, privacy_accepted_at, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
-      .bind(id, email, name, credentials.salt, credentials.digest, PRIVACY_VERSION, now, now).run();
+      .bind(id, email, name, passwordSalt, passwordHash, PRIVACY_VERSION, now, now).run();
   } catch {
     return json({ message: "이메일 주소로 가입할 수 있는 계정이면 인증 안내를 보냈습니다. 받은 편지함을 확인해 주세요." }, 202);
   }
