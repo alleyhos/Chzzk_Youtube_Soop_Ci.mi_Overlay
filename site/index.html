@@ -3,130 +3,146 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f3f2ed">
-  <meta name="description" content="치유숲씨는 치지직, YouTube, 숲, 씨미 라이브 채팅을 한 오버레이에 모아 보여주는 Windows 앱입니다.">
-  <meta property="og:title" content="치유숲씨 — 방송 채팅 오버레이">
-  <meta property="og:description" content="치지직 · YouTube · 숲 · 씨미 채팅을 방송 화면 옆에 모아 보세요.">
+  <meta name="theme-color" content="#171a18">
+  <meta name="description" content="치유숲씨 — 치지직, YouTube, 숲, 씨미 채팅을 한 오버레이로 모아 방송에 집중하세요.">
+  <meta property="og:title" content="치유숲씨 — 네 곳 채팅을 한 화면에">
+  <meta property="og:description" content="치지직 · YouTube · 숲 · 씨미 채팅을 한 화면에 모으는 Windows 방송 도구">
   <meta property="og:type" content="website">
-  <title>치유숲씨 — 방송 채팅 오버레이</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='3' y='3' width='42' height='42' rx='11' fill='%231c2924'/%3E%3Cpath d='M12 13h24v17H23l-7 5v-5h-4z' fill='none' stroke='%23f3f2ed' stroke-width='2'/%3E%3Cpath d='m17 22 4-.5 3-4 4 9 3-4h3' fill='none' stroke='%23d7b270' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <title>치유숲씨 — 네 곳 채팅을 한 화면에</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='3' y='3' width='42' height='42' rx='4' fill='%23d45d3f'/%3E%3Cpath d='M13 12v23m11-28v28m11-19v19M10 39h28' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="치유숲씨 홈">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M8 9h32v24H25L14 41v-8H8z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="m14 22 6-.5 4-6 5 13 4-5h5" stroke="#d7b270" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="brand-name">치유숲씨<small>방송 채팅 오버레이</small></span>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M6 5v14M13 3v16M20 8v11M4 23h18"/></svg></span>
+        <span class="brand-name">치유숲씨<small>방송 채팅 도구</small></span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기"><span></span><span></span></button>
       <nav class="main-nav" id="main-nav" aria-label="주 메뉴">
         <a href="#features">기능</a><a href="#guide">사용 방법</a><a href="#release">변경 내역</a><a href="#contact">문의</a>
       </nav>
-      <a class="header-download" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">최신 버전 <span aria-hidden="true">↗</span></a>
+      <div class="header-actions">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기"><span></span><span></span></button>
+        <a class="header-download" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">다운로드 <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </header>
 
   <main id="main">
     <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="kicker"><span></span> Windows용 방송 도구 <i></i> 버전 1.1.1</p>
-          <h1>방송은 그대로.<br><span>채팅만 한곳에.</span></h1>
-          <p class="hero-description">치지직, YouTube, 숲, 씨미 채팅을 작은 오버레이 하나로 모읍니다. 방송 화면은 띄우지 않고, 필요한 채널만 연결해 사용합니다.</p>
-          <div class="hero-links">
-            <a class="button button-dark" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">다운로드 <span aria-hidden="true">↗</span></a>
-            <a class="text-link" href="#guide">설치 방법 보기 <span aria-hidden="true">↓</span></a>
-          </div>
-          <p class="hero-note">Windows 10/11 · 공개 채팅 주소로 연결 · 계정 로그인 불필요</p>
+      <div class="hero-copy">
+        <p class="eyebrow"><i></i> WINDOWS용 방송 도구 <span>·</span> 1.1.1</p>
+        <h1>채팅창 네 개,<br><em>하나로 모으세요.</em></h1>
+        <p class="hero-lede">치지직, YouTube, 숲, 씨미 채팅을 작은 오버레이 하나에 모읍니다. 방송 영상은 띄우지 않고 채팅만 읽어 옵니다.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">치유숲씨 받기 <span aria-hidden="true">↗</span></a>
+          <a class="button button-text" href="#guide">사용 방법 <span aria-hidden="true">↓</span></a>
         </div>
+        <p class="hero-footnote">Windows 10 / 11 <b>·</b> 공개 채팅 연결 <b>·</b> 프로그램에서 채팅 관리</p>
+        <div class="platform-index" aria-label="지원 플랫폼">
+          <span><b>CH</b>치지직</span><span><b>YT</b>YouTube</span><span><b>SP</b>숲</span><span><b>CM</b>씨미</span>
+        </div>
+      </div>
 
-        <div class="desk">
-          <div class="desk-toolbar">
-            <div class="desk-brand"><span class="desk-mark">ㅊ</span><span><b>치유숲씨</b><small>채팅 오버레이</small></span></div>
-            <div class="desk-state"><i></i> 연결 준비</div>
-            <div class="desk-controls"><span>−</span><span>□</span><span>×</span></div>
+      <div class="console-wrap" aria-label="치유숲씨 프로그램 화면 예시">
+        <div class="console-meta"><span>화면 예시</span><span>주소와 메시지는 예시입니다</span></div>
+        <div class="console">
+          <div class="console-topbar">
+            <div class="console-brand"><span class="mini-mark">ㅊ</span><span>치유숲씨<small>방송 채팅 도구</small></span></div>
+            <div class="console-state"><i></i> 연결 대기 중</div>
+            <div class="window-controls"><span>—</span><span>□</span><span>×</span></div>
           </div>
-          <div class="desk-content">
-            <aside class="desk-rail" aria-label="설정 메뉴 미리보기">
-              <span class="rail-active">연결</span><span>시청자 수</span><span>레이아웃</span><span>테마</span>
+          <div class="console-body">
+            <aside class="console-nav">
+              <small>WORKSPACE</small>
+              <span class="nav-current"><b>01</b>플랫폼 연결</span><span><b>02</b>시청자 수</span><span><b>03</b>오버레이</span><span><b>04</b>채팅 표시</span>
+              <div class="console-nav-foot">CH · YT · SP · CM</div>
             </aside>
-            <div class="desk-main">
-              <div class="desk-heading"><div><small>채팅 연결</small><b>방송 채팅을 연결하세요</b></div><span>4개 플랫폼</span></div>
-              <div class="source-row row-ch"><span class="source-code">CH</span><div class="source-info"><b>치지직</b><small>채널 주소</small></div><div class="source-address">chzzk.naver.com/live/채널주소</div><span class="source-action">연결</span></div>
-              <div class="source-row row-yt"><span class="source-code">YT</span><div class="source-info"><b>YouTube</b><small>라이브 주소</small></div><div class="source-address">youtube.com/watch?v=동영상ID</div><span class="source-action">연결</span></div>
-              <div class="source-row row-sp"><span class="source-code">SP</span><div class="source-info"><b>숲</b><small>방송 주소</small></div><div class="source-address">play.sooplive.com/채널</div><span class="source-action">연결</span></div>
-              <div class="source-row row-cm"><span class="source-code">CM</span><div class="source-info"><b>씨미</b><small>라이브 주소</small></div><div class="source-address">ci.me/@채널/live</div><span class="source-action">연결</span></div>
-              <div class="desk-foot"><span><i></i> 연결된 채팅이 오버레이에 표시됩니다</span><span>설정 저장</span></div>
+            <div class="console-main">
+              <div class="console-heading"><div><small>방송 채널</small><b>플랫폼 연결</b></div><span>4 SOURCES</span></div>
+              <div class="source-line"><i class="tag ch">CH</i><strong>치지직</strong><span>chzzk.naver.com/live/채널주소</span><label>연결</label></div>
+              <div class="source-line"><i class="tag yt">YT</i><strong>YouTube</strong><span>youtube.com/watch?v=동영상ID</span><label>연결</label></div>
+              <div class="source-line"><i class="tag sp">SP</i><strong>숲</strong><span>play.sooplive.com/채널</span><label>연결</label></div>
+              <div class="source-line"><i class="tag cm">CM</i><strong>씨미</strong><span>ci.me/@채널/live</span><label>연결</label></div>
+              <div class="console-divider"></div>
+              <div class="chat-preview-head"><span>오버레이 미리보기</span><span>통합 채팅</span></div>
+              <div class="chat-line"><time>21:14</time><b class="ch-text">CH 치지직</b><span>오늘도 방송 시작!</span></div>
+              <div class="chat-line"><time>21:14</time><b class="yt-text">YT YouTube</b><span>안녕하세요 👋</span></div>
+              <div class="chat-line"><time>21:15</time><b class="cm-text">CM 씨미</b><span>화이팅입니다</span></div>
+              <div class="console-bottom"><span><i></i> 연결된 채팅을 기다리는 중</span><b>오버레이 표시</b></div>
             </div>
           </div>
-          <p class="desk-caption">앱 화면 예시 · 주소와 메시지는 설명용입니다</p>
         </div>
+        <div class="console-caption"><span>치유숲씨 프로그램</span><span>01 — 연결 화면</span></div>
       </div>
     </section>
 
-    <section class="platform-strip" aria-label="지원 플랫폼">
-      <div class="platform-strip-inner">
-        <span class="strip-label">지원 플랫폼</span>
-        <div class="platform-names"><span><i class="p-ch">CH</i>치지직</span><span><i class="p-yt">YT</i>YouTube</span><span><i class="p-sp">SP</i>숲</span><span><i class="p-cm">CM</i>씨미</span></div>
-        <span class="strip-tail">필요한 채널만 골라 연결</span>
-      </div>
-    </section>
-
-    <section class="features content-width" id="features">
-      <div class="section-intro">
-        <p class="section-label">기능</p>
-        <h2>방송 중 손이 덜 가도록<br>필요한 것만 모았습니다.</h2>
-        <p>채팅과 시청자 수를 같은 오버레이에서 다루고, 위치와 표시 방식을 방송 환경에 맞춰 저장합니다.</p>
+    <section class="feature-section section-frame" id="features">
+      <div class="section-heading">
+        <p class="section-index">01 / 하는 일</p>
+        <h2>방송 중 필요한 것만<br>빠르게 확인하세요.</h2>
+        <p>네 플랫폼을 같은 화면에서 관리하고, 오버레이는 방송 화면에 맞춰 직접 정리합니다.</p>
       </div>
       <div class="feature-list">
-        <article class="feature-row"><span class="feature-index">01</span><div><h3>채팅 통합</h3><p>연결한 플랫폼의 공개 채팅을 시간순으로 표시합니다. 이모티콘과 플랫폼 배지도 함께 보여줍니다.</p></div><span class="feature-detail">CH · YT · SP · CM</span></article>
-        <article class="feature-row"><span class="feature-index">02</span><div><h3>시청자 수</h3><p>플랫폼별 인원을 확인하고, 숫자 배지를 각각 원하는 위치로 옮길 수 있습니다.</p></div><span class="feature-detail">개별 위치 저장</span></article>
-        <article class="feature-row"><span class="feature-index">03</span><div><h3>화면에 맞춘 표시</h3><p>글자 크기, 줄 수, 투명도와 테마를 조절합니다. 위치와 크기는 다음 실행에도 기억합니다.</p></div><span class="feature-detail">설정 자동 저장</span></article>
-        <article class="feature-row"><span class="feature-index">04</span><div><h3>방송 중 빠른 조작</h3><p><kbd>Ctrl</kbd> <b>+</b> <kbd>Alt</kbd> <b>+</b> <kbd>O</kbd>로 숨김을 전환하고, <kbd>Ctrl</kbd> <b>+</b> <kbd>Alt</kbd> <b>+</b> <kbd>P</kbd>로 클릭 통과를 켭니다.</p></div><span class="feature-detail">전역 단축키</span></article>
+        <article class="feature-row"><span class="feature-no">01</span><div><h3>채팅 통합</h3><p>치지직 · YouTube · 숲 · 씨미 채팅을 한 오버레이에서 읽습니다.</p></div><span class="feature-mark">CH / YT / SP / CM</span></article>
+        <article class="feature-row"><span class="feature-no">02</span><div><h3>시청자 수</h3><p>플랫폼별 인원을 프로그램에서 확인하고, 오버레이 배지는 각각 이동합니다.</p></div><span class="feature-mark">4 COUNTS</span></article>
+        <article class="feature-row"><span class="feature-no">03</span><div><h3>방송 화면에 맞춤</h3><p>크기, 글자, 배경 투명도, 표시 줄 수와 색 테마를 조절합니다.</p></div><span class="feature-mark">LAYOUT</span></article>
+        <article class="feature-row"><span class="feature-no">04</span><div><h3>게임 중 빠른 조작</h3><p>오버레이를 숨기거나 마우스 클릭을 통과시키는 단축키를 제공합니다.</p></div><span class="feature-mark">CTRL + ALT</span></article>
       </div>
     </section>
 
-    <section class="guide" id="guide">
-      <div class="guide-inner">
-        <div class="guide-heading"><p class="section-label">처음 사용하기</p><h2>주소를 넣고,<br>방송 옆에 두세요.</h2><p>별도 로그인이나 Google Cloud 설정은 필요하지 않습니다.</p><a href="README-KO.txt">자세한 사용 설명서 <span aria-hidden="true">↗</span></a></div>
-        <ol class="guide-steps">
-          <li><span>1</span><div><b>다운로드</b><p>릴리스에서 Windows용 파일을 받아 압축을 풉니다.</p></div></li>
-          <li><span>2</span><div><b>채널 연결</b><p>플랫폼 연결 화면에 방송 주소를 입력합니다.</p></div></li>
-          <li><span>3</span><div><b>배치 저장</b><p>오버레이 위치와 글자 크기를 조절하고 저장합니다.</p></div></li>
+    <section class="guide-section" id="guide">
+      <div class="guide-inner section-frame">
+        <div class="section-heading">
+          <p class="section-index">02 / 시작하기</p>
+          <h2>처음 연결은<br>세 단계면 됩니다.</h2>
+        </div>
+        <ol class="steps">
+          <li><span>01</span><div><h3>실행 파일 받기</h3><p>최신 버전을 내려받아 압축을 풀고 프로그램을 실행합니다.</p></div></li>
+          <li><span>02</span><div><h3>방송 주소 입력</h3><p>플랫폼 연결에서 사용할 방송 또는 채팅 주소를 입력합니다.</p></div></li>
+          <li><span>03</span><div><h3>오버레이 조정</h3><p>채팅을 연결하고 위치와 글자 크기를 방송 화면에 맞춥니다.</p></div></li>
         </ol>
+        <a class="text-arrow" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay#readme">설치 안내와 자주 묻는 질문 <span>↗</span></a>
       </div>
     </section>
 
-    <section class="release content-width" id="release">
-      <div class="release-head"><div><p class="section-label">현재 배포</p><h2>1.1.1</h2><p>Windows용 · 씨미 플랫폼 추가</p></div><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">릴리스 페이지 <span aria-hidden="true">↗</span></a></div>
-      <div class="release-items">
-        <div><span>01</span><p><b>씨미 채팅 지원</b><small>공개 라이브 주소로 채팅 연결</small></p></div>
-        <div><span>02</span><p><b>시청자 배지 배치</b><small>플랫폼별 표시와 위치 조절</small></p></div>
-        <div><span>03</span><p><b>화면 표시 개선</b><small>좁은 오버레이의 글자와 간격 조정</small></p></div>
-      </div>
+    <section class="release-section section-frame" id="release">
+      <div class="release-kicker"><span>현재 배포</span><span>WINDOWS</span></div>
+      <div class="release-main"><div><p class="release-version">1.1.1</p><h2>씨미 채팅을 추가했습니다.</h2><p>치지직, YouTube, 숲, 씨미 채팅을 한 오버레이에서 확인할 수 있습니다.</p></div><a class="button button-light" href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">변경 내역과 다운로드 <span>↗</span></a></div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="contact-inner">
-        <div class="contact-copy"><p class="section-label">문의</p><h2>사용 중 막힌 점이나<br>바라는 기능을 알려주세요.</h2><p>로그인 없이 문의를 보낼 수 있습니다. 답변을 받을 이메일 주소와 상황을 적어 주세요.</p><div class="contact-address"><span></span><div>문의는 운영자 메일로 전달됩니다.<small>계정 정보나 인증 코드는 적지 마세요.</small></div></div><div class="contact-shortcuts"><a href="https://discord.gg/78nkBt5e9S" target="_blank" rel="noopener noreferrer">Discord 커뮤니티 <span aria-hidden="true">↗</span></a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/issues/new" target="_blank" rel="noopener noreferrer">GitHub에 오류 남기기 <span aria-hidden="true">↗</span></a></div></div>
-        <form class="contact-form" id="contact-form" action="/api/contact" method="post" autocomplete="on">
-          <div class="form-pair"><label>이름 또는 닉네임<input name="name" type="text" autocomplete="name" maxlength="60" required placeholder="답변에 사용할 이름"></label><label>답변 받을 이메일<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label></div>
-          <label>문의 종류<select name="topic" required><option value="" selected disabled>선택해 주세요</option><option value="사용 문의">사용 문의</option><option value="오류 제보">오류 제보</option><option value="기능 제안">기능 제안</option><option value="기타">기타</option></select></label>
-          <label>문의 내용<textarea name="message" rows="5" minlength="10" maxlength="4000" required placeholder="오류가 난 상황이나 제안 내용을 적어 주세요."></textarea></label>
-          <label class="contact-consent"><input name="consent" type="checkbox" required><span><a href="privacy.html" target="_blank" rel="noopener noreferrer">문의 데이터 안내</a>를 확인했고 답변 목적의 이메일 전달에 동의합니다.</span></label>
-          <label class="contact-honey" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
-          <button class="submit-button" type="submit">문의 보내기 <span aria-hidden="true">↗</span></button>
-          <p class="contact-result" id="contact-result" role="status" aria-live="polite"></p>
-        </form>
+    <section class="contact-section section-frame" id="contact">
+      <div class="contact-intro">
+        <p class="section-index">03 / 연락하기</p>
+        <h2>사용 중 막힌 점을<br>운영자에게 알려주세요.</h2>
+        <p>로그인 없이 문의할 수 있습니다. 답변 받을 이메일과 문제가 생긴 상황을 적어 주세요.</p>
+        <div class="contact-aside"><span class="aside-mark">↗</span><p>오류 제보 · 사용 문의 · 기능 제안<br><small>계정 비밀번호나 인증 코드는 보내지 마세요.</small></p></div>
+        <div class="contact-links"><a href="https://discord.gg/78nkBt5e9S" target="_blank" rel="noopener noreferrer">Discord 커뮤니티 ↗</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/issues/new" target="_blank" rel="noopener noreferrer">GitHub 오류 제보 ↗</a></div>
       </div>
+      <form id="contact-form" class="contact-form">
+        <div class="form-row">
+          <label>이름 또는 닉네임<input name="name" autocomplete="name" maxlength="60" required placeholder="어떻게 불러드릴까요"></label>
+          <label>답변 받을 이메일<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="name@example.com"></label>
+        </div>
+        <label>문의 종류<select name="topic" required><option value="" selected disabled>선택해 주세요</option><option value="사용 문의">사용 문의</option><option value="오류 제보">오류 제보</option><option value="기능 제안">기능 제안</option><option value="기타">기타</option></select></label>
+        <label>문의 내용<textarea name="message" rows="5" minlength="10" maxlength="4000" required placeholder="문제가 생긴 상황이나 제안 내용을 적어 주세요."></textarea></label>
+        <label class="consent"><input name="consent" type="checkbox" required><span><a href="privacy.html" target="_blank" rel="noopener noreferrer">문의 데이터 안내</a>를 확인했고, 답변을 위한 이메일 전달에 동의합니다.</span></label>
+        <label class="honeypot" aria-hidden="true">비워 두세요<input name="website" tabindex="-1" autocomplete="off"></label>
+        <button class="button button-primary submit-button" type="submit">문의 보내기 <span>↗</span></button>
+        <p id="contact-result" class="contact-result" role="status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">ㅊ</span><span class="brand-name">치유숲씨<small>방송 채팅 오버레이</small></span></a><div class="footer-links"><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Overlay/releases/latest">다운로드</a><a href="privacy.html">문의 데이터 안내</a></div><p>© 2026 치유숲씨 · 치지직 · YouTube · 숲 · 씨미</p></div>
+    <div class="footer-main">
+      <a class="brand" href="/" aria-label="치유숲씨 홈"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M6 5v14M13 3v16M20 8v11M4 23h18"/></svg></span><span class="brand-name">치유숲씨<small>방송 채팅 도구</small></span></a>
+      <p>치지직 · YouTube · 숲 · 씨미</p>
+      <div class="footer-nav"><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay">GitHub</a><a href="https://github.com/alleyhos/Chzzk_Youtube_Soop_Ci.mi_Overlay/releases/latest">다운로드</a><a href="privacy.html">문의 데이터 안내</a></div>
+    </div>
+    <div class="footer-base"><span>© 2026 치유숲씨</span><span>Windows 10 / 11</span></div>
   </footer>
 </body>
 </html>
